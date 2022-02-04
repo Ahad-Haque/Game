@@ -213,19 +213,17 @@ class Lava(pygame.sprite.Sprite):
         self.sprites.append(pygame.image.load('image/lava3.png'))
         self.sprites.append(pygame.image.load('image/lava4.png'))
         self.current_sprite = 0
-        self.image = self.sprites[self.current_sprite]
-        self.rect = self.image.get_rect()
-
-        # img = pygame.image.load('image/lava2.png')
-        self.image = pygame.transform.scale(self.sprites[self.current_sprite], (tile_size, tile_size // 2))
+        self.image = self.sprites[self.current_sprite]     
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
     def update(self):
-        self.current_sprite += 1
+        self.current_sprite += 0.1
         if self.current_sprite >= len(self.sprites):
             self.current_sprite = 0
-        self.image = self.sprites[self.current_sprite]
+        self.image = self.sprites[int(self.current_sprite)]
+        self.image = pygame.transform.scale(self.sprites[int(self.current_sprite)], (tile_size, tile_size // 2))
 
 
 world_data = [
@@ -272,11 +270,9 @@ while run:
         blob_group.update()
     blob_group.draw(screen)
     lava_group.draw(screen)
-
+    
     game_over = player.update(game_over)
     lava_group.update()
-    # draw_grid()
-    # print(world.tile_list)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
