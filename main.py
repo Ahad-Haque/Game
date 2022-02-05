@@ -4,7 +4,7 @@ from pygame.locals import *
 pygame.init()
 
 clock = pygame.time.Clock()
-fps = 35
+fps = 45
 
 screen_width = 1000
 screen_height = 1000
@@ -20,11 +20,6 @@ game_over = 0
 moon_img = pygame.image.load('image/moon.png')
 bg_img = pygame.image.load('image/background.jpg')
 
-"""def draw_grid():
-	for line in range(0, 20):
-		pygame.draw.line(screen, (255, 255, 255), (0, line * tile_size), (screen_width, line * tile_size))
-		pygame.draw.line(screen, (255, 255, 255), (line * tile_size, 0), (line * tile_size, screen_height))"""
-
 
 class player():
     def __init__(self, x, y):
@@ -32,9 +27,9 @@ class player():
         self.image_left = []
         self.index = 0
         self.counter = 0
-        for num in range(1, 5):
-            image_right = pygame.image.load(f'image/player{num}.png')
-            image_right = pygame.transform.scale(image_right, (40, 80))
+        for num in range(1, 12):
+            image_right = pygame.image.load(f'image/player ({num}).png')
+            image_right = pygame.transform.scale(image_right, (50, 100))
             image_left = pygame.transform.flip(image_right, True, False)
             self.image_right.append(image_right)
             self.image_left.append(image_left)
@@ -125,11 +120,13 @@ class player():
             self.rect.y += dy
         elif game_over == -1:
             self.image = self.dead_image
-            self.rect.y -= 5
+            self.rect.y -= 4
 
         # drawing player
         screen.blit(self.image, self.rect)
-        pygame.draw.rect(screen, (255, 255, 255), self.rect, 2)
+
+        #draws a rectangle around the player
+        # pygame.draw.rect(screen, (255, 255, 255), self.rect, 2)
 
         return game_over
 
@@ -183,7 +180,8 @@ class world():
     def draw(self):
         for tile in self.tile_list:
             screen.blit(tile[0], tile[1])
-            pygame.draw.rect(screen, (255, 255, 255), tile[1], 1)
+            #draws a rectangle around the tiles in the map
+            # pygame.draw.rect(screen, (255, 255, 255), tile[1], 1)
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -268,6 +266,7 @@ while run:
 
     if game_over == 0:
         blob_group.update()
+        
     blob_group.draw(screen)
     lava_group.draw(screen)
     
