@@ -16,9 +16,12 @@ pygame.display.set_caption('platformer')
 tile_size = 50
 game_over = 0
 
-# images
-moon_img = pygame.image.load('image/moon.png')
-bg_img = pygame.image.load('image/background.jpg')
+
+bg_img = pygame.image.load('image/BG.png')
+bg_img = pygame.transform.scale(bg_img, (screen_width, screen_height))
+crate_img = pygame.image.load('image/crate.png')
+crate_img = pygame.transform.scale(crate_img, (tile_size, tile_size))
+arrowsign_img = pygame.image.load('image/arrowsign.png')
 
 
 class player():
@@ -258,9 +261,10 @@ run = True
 while run:
 
     clock.tick(fps)
-
     screen.blit(bg_img, (0, 0))
-    screen.blit(moon_img, (100, 100))
+    # screen.blit(moon_img, (100, 100))
+    screen.blit(crate_img, (screen_height - 640, screen_width - 250))
+    screen.blit(arrowsign_img, (screen_height - 900, screen_width - 130))
 
     world.draw()
 
