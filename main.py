@@ -52,8 +52,8 @@ class player():
     def update(self, game_over):
         dx = 0  # delta x
         dy = 0
-        walk_cooldown = 4
-
+        walk_cooldown = 2
+        # movement
         if game_over == 0:
             key = pygame.key.get_pressed()
             if key[pygame.K_SPACE] and self.jump == False:
